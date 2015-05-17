@@ -128,15 +128,31 @@ Now we need to aggregate based on weekend vs. weekday and interval:
 aggdata3 <- aggregate(act$steps, by=list(act$week_time,act$interval), FUN=mean, na.rm=TRUE)
 
 weekday <- aggdata3[aggdata3$Group.1=="weekday",]
-
-plot(weekday$Group.2,weekday$x, type="l")
-
 weekend <- aggdata3[aggdata3$Group.1=="weekend",]
-
-points(weekend$Group.2, weekend$x, type="l", col="green")
 ```
 
-![](instructions_fig/unnamed-chunk-11-1.png) 
+and plot the results.  I like this chart better visually than the assigned chart.
+
+
+```r
+plot(weekday$Group.2,weekday$x, type="l", xlab="daily 5 minute intervals (HHMM)", ylab="steps")
+points(weekend$Group.2, weekend$x, type="l", col="green")
+legend('topright', c("weekday", "weekend"), lty=1, col=c("black", "green"), bty="o")
+```
+
+![](instructions_fig/unnamed-chunk-12-1.png) 
 
 Looking at the chart, we see that there is less steps taken in the 5-9am period on weekends, but a lot more steps taken in the afternoon and evening.
 
+Here is the assigned chart:
+
+```r
+par(mfrow = c(2,1))
+plot(weekday$Group.2,weekday$x, type="l", xlab="daily 5 minute interval (HHMM)", ylab="steps")
+legend('topright', c("weekday"), lty=1, col=c("black"), bty="o")
+
+plot(weekend$Group.2, weekend$x, type="l", col="green", ylim=c(0, 200), xlab="daily 5 minute interval (HHMM)", ylab="steps")
+legend('topright', c("weekend"), lty=1, col=c("green"), bty="o")
+```
+
+![](instructions_fig/unnamed-chunk-13-1.png) 
