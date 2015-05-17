@@ -12,7 +12,7 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.path='instructions_fig/', 
 ```{r}
 act <- read.csv("activity.csv")
 
-mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=mean, na.rm=TRUE)
+mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=sum, na.rm=TRUE)
 ```
 
 ```{r}
@@ -23,7 +23,7 @@ mean_interval_aggdata <- aggregate(act$steps, by=list(act$interval), FUN=mean, n
 ## What is mean total number of steps taken per day?
 Here is a histogram of the number of steps taken each day:
 ```{r}
-hist(mean_daily_aggdata$x, col="grey80")
+hist(mean_daily_aggdata$x, col="grey80", xlab="Steps per Day", main="Frequency of Total Steps per Day")
 ```
 
 Here is the mean and median of the number of steps taken each day:
@@ -59,7 +59,7 @@ act$steps[is.na(act$steps)] = mean(act$steps, na.rm=TRUE)
 
 Now that we have inputed values for NAs into the dataset, here is the new histogram:
 ```{r}
-mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=mean, na.rm=TRUE)
+mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=sum, na.rm=TRUE)
 
 hist(mean_daily_aggdata$x, col="grey80")
 

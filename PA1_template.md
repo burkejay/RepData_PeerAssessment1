@@ -6,7 +6,7 @@
 ```r
 act <- read.csv("activity.csv")
 
-mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=mean, na.rm=TRUE)
+mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=sum, na.rm=TRUE)
 ```
 
 
@@ -18,7 +18,7 @@ mean_interval_aggdata <- aggregate(act$steps, by=list(act$interval), FUN=mean, n
 Here is a histogram of the number of steps taken each day:
 
 ```r
-hist(mean_daily_aggdata$x, col="grey80")
+hist(mean_daily_aggdata$x, col="grey80", xlab="Steps per Day", main="Frequency of Total Steps per Day")
 ```
 
 ![](instructions_fig/unnamed-chunk-3-1.png) 
@@ -30,7 +30,7 @@ mean(mean_daily_aggdata$x, na.rm=TRUE)
 ```
 
 ```
-## [1] 37.3826
+## [1] 9354.23
 ```
 
 ```r
@@ -38,7 +38,7 @@ median(mean_daily_aggdata$x, na.rm = TRUE)
 ```
 
 ```
-## [1] 37.37847
+## [1] 10395
 ```
 
 ## What is the average daily activity pattern?
@@ -83,7 +83,7 @@ act$steps[is.na(act$steps)] = mean(act$steps, na.rm=TRUE)
 Now that we have inputed values for NAs into the dataset, here is the new histogram:
 
 ```r
-mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=mean, na.rm=TRUE)
+mean_daily_aggdata <- aggregate(act$steps, by=list(act$date), FUN=sum, na.rm=TRUE)
 
 hist(mean_daily_aggdata$x, col="grey80")
 ```
@@ -95,7 +95,7 @@ mean(mean_daily_aggdata$x, na.rm=TRUE)
 ```
 
 ```
-## [1] 37.3826
+## [1] 10766.19
 ```
 
 ```r
@@ -103,7 +103,7 @@ median(mean_daily_aggdata$x, na.rm = TRUE)
 ```
 
 ```
-## [1] 37.3826
+## [1] 10766.19
 ```
 
 The mean does not change because we added over 2000 values to the dataset that are all exactly the mean,  The median changes to the mean, again because we added so many centrally-located values to the dataset, there is a strong chance that the median would become the aadded value, which is the mean in this case.
